@@ -1,25 +1,46 @@
-import Link from "next/link"
+import Link from 'next/link'
 
-const HeroBanner = () => {
+import { getBanner } from '@/sanity/GetBanner'
+
+import Image from 'next/image'
+
+const HeroBanner = async () => {
+  const banner = await getBanner()
   return (
     <>
       <div className='hero-banner-container'>
-        <div>
-          <p className='beates-solo'>small text</p>
-          <h3>mid text</h3>
-          <img src="" alt="" className="hero-banner-image" />
+        {banner.map((ban) => (
+          <div id={ban._id}>
+            <div>
+              <p className='beates-solo text-black'>{ban.smallText}</p>
 
-          <div>
-            <Link href="/product/ID">
-                <button className="" type="button">b</button>
-            </Link>
+              <h3>{ban.midText}</h3>
+              <h1>{ban.largeText1}</h1>
+              {ban.image && (
+                <img
+                  className='hero-banner-image'
+                  src={ban.image}
+                  width={200}
+                  height={200}
+                  alt={ban.name}
+                />
+              )}
 
-            <div className="desc">
-                <h5>hs</h5>
-                <p>jf</p>
+              <div>
+                <Link href={`/product/${ban.product}`}>
+                  <button className='' type='button'>
+                    {ban.button}
+                  </button>
+                </Link>
+
+                <div className='desc'>
+                  <h5>Description</h5>
+                  <p>{ban.desc}</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </>
   )
