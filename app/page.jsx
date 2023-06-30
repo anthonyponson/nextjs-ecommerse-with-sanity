@@ -23,14 +23,3 @@ export default async function Home() {
   )
 }
 
-// export const getServerSideProps = async () => {
-//   const q = '*[_type ==  "product"]'
-//   const newProducts = await newClient.fetch(q)
-
-//   const bannerQuery = '*[_type ==  "banner"]'
-//   const bannerData = await newClient.fetch(bannerQuery)
-
-//   return{
-//     props: { newProducts , bannerData}
-//   }
-// }

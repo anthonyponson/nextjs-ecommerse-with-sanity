@@ -1,11 +1,19 @@
 import './globals.css'
-import { Inter, Poppins } from 'next/font/google'
+
+import {Poppins, Pacifico} from 'next/font/google'
 
 import Layout from './components/Layout'
 
-const inter = Inter({ subsets: ['latin'] })
+import Head from 'next/head'
 
-// const popins = Poppins({subsets: ['latin']})
+import { Footer, Navbar } from './components'
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+})
+
+
 
 export const metadata = {
   title: 'E-commerce',
@@ -15,9 +23,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className={`inter.className layout`}><Layout>
-        {children}
-        </Layout></body>
+      <body className={poppins.className}>
+        <div className=''>
+          <Head>
+            <title>jen's store</title>
+          </Head>
+
+          <header>
+            <Navbar />
+          </header>
+
+          <main className='main-container layout'>{children}</main>
+          <footer>
+            <Footer />
+          </footer>
+        </div>
+      </body>
     </html>
   )
 }
