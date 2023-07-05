@@ -1,6 +1,6 @@
-const product = {
-  name: 'product',
-  title: 'Product',
+const products = {
+  name: 'products',
+  title: 'Products',
   type: 'document',
   fields: [
     {
@@ -48,4 +48,4 @@ const product = {
   ],
 }
 
-export default product
+export default products

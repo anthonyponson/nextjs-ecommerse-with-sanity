@@ -1,7 +1,8 @@
-import product from "./product";
+import product from './product'
 
-import banner from "./banner";
+import banner from './banner'
+import products from './products'
 
-const schemas = [product, banner]
+const schemas = [product, banner, products]
 
-export default schemas;
+export default schemas

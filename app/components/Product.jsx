@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const Product = async () => {
-  
   const products = await getProduct()
 
   return (
@@ -15,9 +14,18 @@ const Product = async () => {
             <div className=''>
               <Link href={`/product/${product.slug}`}>
                 <div className='product-card'>
-                  {product.image && <Image className='product-image' width={200} height={1} src={product.image} alt='' />}
-                  <p className="product-name">{product.name}</p>
-                  <p className="product-price">{product.price}</p>
+                  {product.images && product.images.length > 0 && (
+                    <img
+                    className='product-image'
+                      key={product.images[0].url}
+                      src={product.images[0].url}
+                      alt={product.images[0].alt}
+                      width={200}
+                      height={200}
+                    />
+                  )}
+                  <p className='product-name'>{product.name}</p>
+                  <p className='product-price'>{product.price}</p>
                 </div>
               </Link>
             </div>

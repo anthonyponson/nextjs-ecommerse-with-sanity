@@ -11,7 +11,7 @@ const Nabbar = () => {
           </Link>
         </p>
 
-        <button type="button" className='cart-icon' onClick=''>
+        <button type="button" className='cart-icon'>
           <AiOutlineShoppingCart/>
           <span className='cart-item-qty'>1</span>
         </button>
