@@ -1,3 +1,5 @@
+
+
 import { createClient, groq } from 'next-sanity'
 
 export async function getProduct() {
@@ -11,6 +13,7 @@ export async function getProduct() {
     groq`*[_type == 'product']{ 
       _createdAt,
       name,
+      id,
       price,
       details,
       'slug': slug.current,
@@ -22,6 +25,8 @@ export async function getProduct() {
   )
 }
 
+
+
 export async function getProducts(slug) {
   const client = createClient({
     projectId: 'mjkpoclj',
@@ -29,12 +34,12 @@ export async function getProducts(slug) {
     apiVersion: '2023-06-18',
   })
 
+  console.log('slug', slug)
   const product = await client.fetch(
-    groq`*[_type == 'product' && slug.current == $slug]{ 
-      _id, 
+    groq`*[_type == 'product' && slug.current == $slug]{
+      _id,
       _createdAt,
       name,
-      image,
       details,
       price,
       "slug": slug.current,
@@ -45,35 +50,8 @@ export async function getProducts(slug) {
       url,
       content
     }`,
-    { slug }
+    {slug : slug || '' }
   )
 
-  return product[0]
+  return product
 }
-
-//array of products
-
-// export async function arrayOfProducts() {
-//   const client = createClient({
-//     projectId: 'mjkpoclj',
-//     dataset: 'production',
-//     apiVersion: '2023-06-18',
-//   })
-
-//   return client.fetch(
-//     groq`*[_type == 'products']{
-//       _id,
-//       _createdAt,
-//       name,
-//       price,
-//       details,
-//       'slug': slug.current,
-//       url,
-//       content,
-//       images[] {
-//         alt,
-//         'url': asset->url
-//       }
-//     }`
-//   )
-// }
