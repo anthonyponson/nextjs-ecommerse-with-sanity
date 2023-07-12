@@ -1,5 +1,3 @@
-
-
 import { createClient, groq } from 'next-sanity'
 
 export async function getProduct() {
@@ -25,8 +23,6 @@ export async function getProduct() {
   )
 }
 
-
-
 export async function getProducts(slug) {
   const client = createClient({
     projectId: 'mjkpoclj',
@@ -34,8 +30,7 @@ export async function getProducts(slug) {
     apiVersion: '2023-06-18',
   })
 
-  console.log('slug', slug)
-  const product = await client.fetch(
+  const products = await client.fetch(
     groq`*[_type == 'product' && slug.current == $slug]{
       _id,
       _createdAt,
@@ -50,8 +45,9 @@ export async function getProducts(slug) {
       url,
       content
     }`,
-    {slug : slug || '' }
+    { slug }
   )
 
-  return product
+  return products // return the array of products directly
 }
+

@@ -1,16 +1,20 @@
+'use client'
+
 import { getProducts } from '@/sanity/getProduct'
 import { Product } from '@/app/components'
-import {
-  AiOutlineMinus,
-  AiOutlinePlus,
-  AiFillStar,
-  AiOutlineStar,
-} from 'react-icons/ai'
+import { useState } from 'react'
 
-const ProductPage = async ({ params }) => {
-  const slug = params.product
+import { useParams } from 'next/navigation'
 
-  const products = await getProducts(slug)
+const ProductPage = () => {
+
+  const params  = useParams()
+  console.log(params)
+
+  const [index , setIndex] = useState()
+
+  const products =  getProducts(params)
+  console.log(products, 'products')
 
   return (
     <>
@@ -30,8 +34,8 @@ const ProductPage = async ({ params }) => {
               <h2>{products.name}</h2>
             </div>
             <div className='flex flex-row'>
-              {products.map((product) => (
-                <div key={product._id} className='flex flex-row'>
+              {/* {products.map((product) => (
+                <div key={product._id} className='small-images-container'>
                   {product.images &&
                     product.images.map((image) => (
                       <>
@@ -41,17 +45,16 @@ const ProductPage = async ({ params }) => {
                           alt={image.alt}
                           height={70}
                           width={70}
-                          // onMouseOver={index}
                         />
                       </>
                     ))}
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
 
           <div className='flex flex-col'>
-            {products.map((product) => (
+            {/* {products.map((product) => (
               <>
                 <h2>{product.name}</h2>
                 <div className='reviews'>
@@ -86,7 +89,7 @@ const ProductPage = async ({ params }) => {
                   </button>
                 </div>
               </>
-            ))}
+            ))} */}
           </div>
         </div>
 
